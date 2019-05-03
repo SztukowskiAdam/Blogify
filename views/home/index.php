@@ -1,3 +1,1 @@
-<br>
-Home index here :D
-<br>
+Witam na stronie głównej

@@ -4,7 +4,11 @@ namespace Kernel;
 
 class Error404Controller extends Controller
 {
-    public function index() {
-        $this->view->render('errors/404');
+    /**
+     * Method to render 404 not found page
+     * @return View
+     */
+    public function index(): View {
+        return $this->view->render('errors/404');
     }
 }

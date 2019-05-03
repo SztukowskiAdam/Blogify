@@ -2,8 +2,6 @@
 
 namespace Kernel;
 
-use Kernel\Database;
-
 class Model
 {
     protected $table = '';
@@ -95,6 +93,15 @@ class Model
 
     }
 
+    /**
+     * Selects rows where $key $statement $value
+     * e.g. name = 'John'
+     * or   age >= 18
+     * @param string $key
+     * @param string $statement
+     * @param string $value
+     * @return array
+     */
     public function where(string $key, string $statement, string $value) {
         $query = "select * from $this->table where $key $statement :$key";
 
@@ -107,19 +114,23 @@ class Model
         return $pdoQuery->fetchAll();
     }
 
+    /**
+     * Multiple where statements
+     * @param array $data
+     * @return array
+     */
     public function whereData(array $data): array {
 
-        $query = "";
-        $counter = 0;
+        $query = '';
+        $first = true;
         foreach ($data as $key => $value) {
-            if (!$counter) {
+            if ($first) {
                 $query .= "select * from $this->table where $key = :$key";
+                $first = false;
             } else {
                 $query .= " and $key = :$key";
             }
-            $counter++;
         }
-
         $pdoQuery = $this->database->prepare($query);
 
         foreach ($data as $key => $value) {
@@ -127,7 +138,6 @@ class Model
         }
 
         $pdoQuery->execute();
-
         return $pdoQuery->fetchAll();
     }
 

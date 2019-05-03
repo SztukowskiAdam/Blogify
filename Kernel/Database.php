@@ -14,6 +14,14 @@ class Database
     public function __construct(){}
     public function __clone(){}
 
+    /**
+     * Method to connect with database
+     * @param null|string $host
+     * @param null|string $dbName
+     * @param null|string $username
+     * @param null|string $password
+     * @return null|\PDO
+     */
     public static function getInstance(?string $host = null, ?string $dbName = null, ?string $username = null, ?string $password = null): ?\PDO {
         if (!isset(self::$instance)) {
             $host = $host ?? self::HOST;

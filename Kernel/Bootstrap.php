@@ -23,7 +23,7 @@ class Bootstrap
             } else if (array_key_exists($_GET['path'], Router::$GET)) {
                 $flag = $this->executeMethodWithoutParams($_GET['path'], 'GET');
             } else {
-                // we have some params or array doesn't exist
+                // we have some params or route doesn't exist
                 $runWithParams = false;
                 $tokens = explode('/', rtrim($_GET['path'], '/'));
 

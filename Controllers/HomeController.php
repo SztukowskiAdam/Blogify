@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Kernel\Controller;
+use Kernel\View;
 
 class HomeController extends Controller
 {
@@ -10,7 +11,11 @@ class HomeController extends Controller
         parent::__construct();
     }
 
-    public function index() {
-        $this->view->render('home/index');
+    /**
+     * Renders index view
+     * @return View
+     */
+    public function index(): View {
+        return $this->view->render('home/index');
     }
 }

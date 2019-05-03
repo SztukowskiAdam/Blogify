@@ -13,6 +13,11 @@ class UsersAdapter
     private static $users;
     private static $usersDTO;
 
+    /**
+     * Converts UsersDTO into Users class
+     * @param UsersDTO $usersDTO
+     * @return Users
+     */
     public static function getModel(UsersDTO $usersDTO): Users {
         self::$users = new Users();
         self::$usersDTO = $usersDTO;
@@ -30,6 +35,11 @@ class UsersAdapter
         return self::$users;
     }
 
+    /**
+     * Converts array into Users class
+     * @param array $data
+     * @return Users
+     */
     public static function getModelFromArray(array $data): Users {
         self::$users = new Users();
 
@@ -43,10 +53,14 @@ class UsersAdapter
             array_key_exists('updatedAt', $data) ? self::$users->updatedAt = $data['updatedAt'] : self::$users->updatedAt = null;
         }
 
-
         return self::$users;
     }
 
+    /**
+     * Converts Users into UsersDTO class
+     * @param Users $users
+     * @return UsersDTO
+     */
     public static function getModelDTO(Users $users): UsersDTO {
         self::$usersDTO = new UsersDTO();
         self::$users = $users;
@@ -63,6 +77,11 @@ class UsersAdapter
         return self::$usersDTO;
     }
 
+    /**
+     * Converts Basic Model into Users class
+     * @param Model $model
+     * @return Users
+     */
     public static function getModelFromBasicModel(Model $model): Users {
         self::$users = new Users();
 

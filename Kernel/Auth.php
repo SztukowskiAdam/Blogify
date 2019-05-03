@@ -25,6 +25,12 @@ class Auth
         self::$usersModel = new Users();
     }
 
+    /**
+     * Method to login
+     * @param string $email
+     * @param string $password
+     * @return Users|null
+     */
     public static function attempt(string $email, string $password): ?Users {
         self::$usersModel = new Users();
         if (filter_var(filter_var($email, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {
@@ -43,6 +49,10 @@ class Auth
         return null;
     }
 
+    /**
+     * Method to get current logged in user
+     * @return Users|null
+     */
     public static function user(): ?Users {
         if (isset($_SESSION['user'])) {
             $user = new Users();
@@ -51,6 +61,10 @@ class Auth
         return null;
     }
 
+    /**
+     * Method to validate if user is admin
+     * @return bool
+     */
     public static function isAdmin(): bool {
         if ($user = self::user()) {
             return $user->isAdmin;
@@ -58,6 +72,11 @@ class Auth
         return false;
     }
 
+    /**
+     * Method to register users
+     * @param UsersDTO $usersDTO
+     * @return int
+     */
     public static function register(UsersDTO $usersDTO) {
         self::$usersModel = new Users();
 

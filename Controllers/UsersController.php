@@ -17,14 +17,10 @@ class UsersController extends Controller
         $this->model = new Users();
     }
 
-    public function index(): View {
-        var_dump($_SESSION);
-        $this->view->user = $this->model->find(1);
-        return $this->view->render('users/index');
-    }
-
     public function login(): View {
-
+        if (Auth::user()) {
+            return $this->redirect('dashboard');
+        }
         return $this->view->render('users/login');
     }
 
@@ -48,5 +44,10 @@ class UsersController extends Controller
             return $this->view->render('users/dashboard');
         }
         else return $this->redirect('../');
+    }
+
+    public function logout(): View {
+        session_destroy();
+        return $this->redirect('../');
     }
 }
