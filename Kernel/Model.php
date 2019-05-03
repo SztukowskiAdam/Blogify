@@ -56,8 +56,8 @@ class Model
     public function save(array $data): ?string {
         if ($this->timestamps) {
             $now = date('Y-m-d H:i:s');
-            $data['created_at'] = $now;
-            $data['updated_at'] = $now;
+            $data['createdAt'] = $now;
+            $data['updatedAt'] = $now;
         }
 
         $keys = array_keys($data);
@@ -93,6 +93,42 @@ class Model
      */
     public function delete(int $id): bool {
 
+    }
+
+    public function where(string $key, string $statement, string $value) {
+        $query = "select * from $this->table where $key $statement :$key";
+
+        $pdoQuery = $this->database->prepare($query);
+
+        $pdoQuery->bindParam(":$key", $value);
+
+        $pdoQuery->execute();
+
+        return $pdoQuery->fetchAll();
+    }
+
+    public function whereData(array $data): array {
+
+        $query = "";
+        $counter = 0;
+        foreach ($data as $key => $value) {
+            if (!$counter) {
+                $query .= "select * from $this->table where $key = :$key";
+            } else {
+                $query .= " and $key = :$key";
+            }
+            $counter++;
+        }
+
+        $pdoQuery = $this->database->prepare($query);
+
+        foreach ($data as $key => $value) {
+            $pdoQuery->bindParam(":$key", $value);
+        }
+
+        $pdoQuery->execute();
+
+        return $pdoQuery->fetchAll();
     }
 
 

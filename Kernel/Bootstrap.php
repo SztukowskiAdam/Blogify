@@ -14,25 +14,41 @@ class Bootstrap
     public function __construct() {
         require_once ('routes/web.php');
 
+        session_start();
         $flag = false;
         $runWithParams = true;
         if (isset($_GET['path'])) {
-            if (array_key_exists($_GET['path'], Router::$GET)) {
-                $flag = $this->executeMethodWithoutParams($_GET['path']);
+            if (array_key_exists($_GET['path'], Router::$POST) && !empty($_POST)) {
+                $flag = $this->executeMethodWithoutParams($_GET['path'], 'POST');
+            } else if (array_key_exists($_GET['path'], Router::$GET)) {
+                $flag = $this->executeMethodWithoutParams($_GET['path'], 'GET');
             } else {
-                // we have some params
+                // we have some params or array doesn't exist
                 $runWithParams = false;
                 $tokens = explode('/', rtrim($_GET['path'], '/'));
-                foreach (Router::$GET as $key => $value) {
-                    if ($this->executeMethodWithParams($key, $value, $tokens)) {
-                        $runWithParams = true;
+
+                if (!empty($_POST)) {
+                    foreach (Router::$POST as $key => $value) {
+                        if ($this->executeMethodWithParams($key, $value, $tokens)) {
+                            $runWithParams = true;
+                            break;
+                        }
+                    }
+                } else {
+                    foreach (Router::$GET as $key => $value) {
+                        if ($this->executeMethodWithParams($key, $value, $tokens)) {
+                            $runWithParams = true;
+                            break;
+                        }
                     }
                 }
             }
         } else {
             // we have index page request
-            if (array_key_exists('/', Router::$GET)) {
-                $flag = $this->executeMethodWithoutParams('/');
+            if (array_key_exists('/', Router::$POST) && !empty($_POST)) {
+                $flag = $this->executeMethodWithoutParams('/', 'POST');
+            } else if (array_key_exists('/', Router::$GET)) {
+                $flag = $this->executeMethodWithoutParams('/', 'GET');
             } else {
                 $flag = true;
             }
@@ -46,10 +62,11 @@ class Bootstrap
     /**
      * Attempts to execute method without params
      * @param string $path
+     * @param string $method
      * @return bool
      */
-    private function executeMethodWithoutParams(string $path): bool {
-        $divider = explode('@', Router::$GET[$path]);
+    private function executeMethodWithoutParams(string $path, string $method = 'GET'): bool {
+        $method === 'GET' ? $divider = explode('@', Router::$GET[$path]) : $divider = explode('@', Router::$POST[$path]);
 
         if (file_exists('Controllers/'.$divider[0].'.php')) {
             $controllerName = 'Controllers\\'.$divider[0];

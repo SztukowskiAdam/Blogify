@@ -2,9 +2,9 @@
 
 namespace Kernel;
 
-class Error404Controller
+class Error404Controller extends Controller
 {
     public function index() {
-        echo 'PAGE NOT FOUND';
+        $this->view->render('errors/404');
     }
 }

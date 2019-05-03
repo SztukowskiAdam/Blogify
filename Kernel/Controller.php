@@ -10,4 +10,8 @@ class Controller
     {
         $this->view = new View();
     }
+
+    public function redirect(string $to) {
+        return header("Location: $to");
+    }
 }

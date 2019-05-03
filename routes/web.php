@@ -4,6 +4,6 @@ namespace Routes;
 use Kernel\Router;
 
 Router::get('/', 'HomeController@index');
-Router::get('users', 'UsersController@index');
-Router::get('users/create', 'UsersController@create');
-Router::get('users/edit/:id', 'UsersController@edit');
+Router::get('admin/login', 'UsersController@login');
+Router::post('admin/attempt', 'UsersController@attempt');
+Router::get('admin/dashboard', 'UsersController@dashboard');

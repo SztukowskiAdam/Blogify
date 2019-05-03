@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Kernel\Auth;
 use Kernel\Controller;
 use Kernel\View;
 use Models\Users;
@@ -17,16 +18,35 @@ class UsersController extends Controller
     }
 
     public function index(): View {
+        var_dump($_SESSION);
         $this->view->user = $this->model->find(1);
         return $this->view->render('users/index');
     }
 
-    public function create() {
-        echo 'USERS CREATE';
+    public function login(): View {
+
+        return $this->view->render('users/login');
     }
 
-    public function edit() {
-        var_dump(func_get_args(0)[0][0]);
-        var_dump($this->model->find((int)func_get_args(0)[0][0]));
+    public function attempt(): View {
+        if (!empty($_POST)) {
+            $user = Auth::attempt($_POST['email'], $_POST['password']);
+
+            if ($user) {
+                $this->view->user = $user;
+                return $this->redirect('dashboard');
+            } else {
+                $this->view->email = $_POST['email'];
+            }
+        }
+        return $this->view->render('users/login');
+    }
+
+    public function dashboard(): View {
+        if (Auth::user()) {
+            $this->view->user = Auth::user();
+            return $this->view->render('users/dashboard');
+        }
+        else return $this->redirect('../');
     }
 }

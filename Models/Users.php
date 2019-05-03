@@ -8,5 +8,13 @@ class Users extends Model
 {
     protected $table = 'users';
     protected $primaryKey = 'id';
-    protected $timestamps = true;
+    public $timestamps = true;
+
+    public $id;
+    public $name;
+    public $password;
+    public $email;
+    public $isAdmin;
+    public $createdAt;
+    public $updatedAt;
 }
