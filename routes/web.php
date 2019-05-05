@@ -4,7 +4,13 @@ namespace Routes;
 use Kernel\Router;
 
 Router::get('/', 'HomeController@index');
-Router::get('admin/login', 'UsersController@login');
-Router::post('admin/attempt', 'UsersController@attempt');
-Router::get('admin/dashboard', 'UsersController@dashboard');
-Router::get('admin/logout', 'UsersController@logout');
+Router::get('articles', 'ArticlesController@index');
+Router::get('articles/:slug', 'ArticlesController@show');
+
+/* ADMIN */
+Router::get('admin/login', 'AdminController@login');
+Router::post('admin/attempt', 'AdminController@attempt');
+Router::get('admin/dashboard', 'AdminController@dashboard');
+Router::get('admin/logout', 'AdminController@logout');
+Router::get('admin/articles', 'ArticlesController@adminIndex');
+Router::get('admin/articles/edit/:id', 'ArticlesController@edit');

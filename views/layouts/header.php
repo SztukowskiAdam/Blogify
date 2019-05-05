@@ -7,6 +7,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="Blogify to platforma do tworzenia artykułów. Znajdziemy dla Ciebie coś odpowiedniego!" />
 
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<?= \Kernel\Router::path('resources/assets/css/style.css')?>" />
 </head>
 <body>

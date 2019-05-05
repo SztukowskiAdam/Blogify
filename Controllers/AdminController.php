@@ -7,7 +7,7 @@ use Kernel\Controller;
 use Kernel\View;
 use Models\Users;
 
-class UsersController extends Controller
+class AdminController extends Controller
 {
     private $model;
 
@@ -19,7 +19,7 @@ class UsersController extends Controller
 
     public function login(): View {
         if (Auth::user()) {
-            return $this->redirect('dashboard');
+            return $this->redirect('admin/dashboard');
         }
         return $this->view->render('users/login');
     }
@@ -30,7 +30,7 @@ class UsersController extends Controller
 
             if ($user) {
                 $this->view->user = $user;
-                return $this->redirect('dashboard');
+                return $this->redirect('admin/dashboard');
             } else {
                 $this->view->email = $_POST['email'];
             }
@@ -43,11 +43,11 @@ class UsersController extends Controller
             $this->view->user = Auth::user();
             return $this->view->render('users/dashboard');
         }
-        else return $this->redirect('../');
+        else return $this->redirect('/');
     }
 
     public function logout(): View {
         session_destroy();
-        return $this->redirect('../');
+        return $this->redirect('/');
     }
 }

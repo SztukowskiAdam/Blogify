@@ -115,7 +115,7 @@ class Bootstrap
                         $controller = new $controllerName();
 
                         if (method_exists($controller, $actionName)) {
-                            $controller->{$actionName}(@array_slice($tokens, substr_count(substr($key, 0, strpos($key, ':')), '/')));
+                            $controller->{$actionName}(@array_slice($tokens, substr_count(substr($key, 0, strpos($key, ':')), '/'))[0]);
                             return true;
                         }
                     }

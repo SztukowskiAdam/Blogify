@@ -2,8 +2,27 @@
 
 namespace Kernel;
 
+
 class View
 {
+    /**
+     * Composes view with data from all Composers located in Composers directory
+     * View constructor.
+     */
+    public function __construct() {
+
+        foreach (new \DirectoryIterator('Composers') as $fileInfo) {
+            if ($fileInfo->getExtension() == 'php') {
+                $className = 'Composers\\'.rtrim($fileInfo->getBasename(), '.php');
+                $class = new $className();
+
+                foreach (get_object_vars($class->compose()) as $property => $value) {
+                    $this->{$property} = $value;
+                }
+            }
+        }
+    }
+
     /**
      * Renders specivic view and layout
      * @param $viewPath

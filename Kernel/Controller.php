@@ -16,6 +16,8 @@ class Controller
      * @param string $to
      */
     public function redirect(string $to) {
+        $to = Router::path($to);
+        var_dump($to);
         return header("Location: $to");
     }
 }
