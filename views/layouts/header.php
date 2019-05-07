@@ -9,6 +9,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<?= \Kernel\Router::path('resources/assets/css/style.css')?>" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
 </head>
 <body>
 <?php

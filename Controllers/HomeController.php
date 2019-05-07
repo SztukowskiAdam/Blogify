@@ -21,7 +21,7 @@ class HomeController extends Controller
      * @return View
      */
     public function index(): View {
-        $this->view->articles = $this->article->where('homePage', '=', 1);
+        $this->view->articles = $this->article->where('homePage', '=', 1, 'createdAt', 'DESC');
         return $this->view->render('home/index');
     }
 }

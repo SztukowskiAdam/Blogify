@@ -1,4 +1,4 @@
-<h1 class="caption">Blog jakiego jeszcze nie znasz</h1>
+<h1 class="teaser">Blog jakiego jeszcze nie znasz</h1>
 
 <main class="container">
     <?php
@@ -34,7 +34,7 @@
                 echo '</div>';
             } else {
                 $counter = 0;
-                echo '</div><div class="row">';
+                echo '<div style="clear: both"></div></div><div class="row">';
                 echo '<div class="photo-box col-66">';
                 echo '<a href="'.\Kernel\Router::path('articles/'.$article->slug).'">';
                 echo '<img src="'.\Kernel\Router::path('resources/images/articles/').$article->image.'">';
@@ -58,7 +58,7 @@
                 echo '</div>';
             } else {
                 $counter = 0;
-                echo '</div><div class="row">';
+                echo '<div style="clear: both"></div></div><div class="row">';
                 echo '<div class="photo-box col-33">';
                 echo '<a href="'.\Kernel\Router::path('articles/'.$article->slug).'">';
                 echo '<img src="'.\Kernel\Router::path('resources/images/articles/').$article->image.'">';
@@ -88,6 +88,6 @@
             }
         }
     }
-    echo '</div>';
+    echo '<div style="clear: both"></div></div>';
     ?>
 </main>

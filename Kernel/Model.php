@@ -17,10 +17,20 @@ class Model
 
     /**
      * Get all records method
+     * @param string|null $orderBy
+     * @param string|null $asc
      * @return array
      */
-    public function getAll(): array {
+    public function getAll(string $orderBy = null, string $asc = null): array {
         $query = "select * from $this->table";
+
+        if (!is_null($orderBy)) {
+            $query .= " ORDER BY $orderBy";
+
+            if (!is_null($asc)) {
+                $query .= " $asc";
+            }
+        }
 
         $pdoQuery = $this->database->prepare($query);
 
@@ -80,8 +90,28 @@ class Model
      * @param int $id
      * @return bool
      */
-    public function update(array $data, int $id): bool {
+    public function update(array $data, string $id): bool {
+        if ($this->timestamps) {
+            $now = date('Y-m-d H:i:s');
+            $data['updatedAt'] = $now;
+        }
 
+        $keys = array_keys($data);
+
+        $query = "UPDATE $this->table SET ";
+
+        foreach ($keys as $key) {
+            $query .= "$key=?, ";
+        }
+        $query = substr($query, 0, strlen($query) - 2);
+        $query .= " WHERE $this->primaryKey = $id";
+
+        $statement = $this->database->prepare($query);
+
+        if ($statement->execute(array_values($data))) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -100,10 +130,20 @@ class Model
      * @param string $key
      * @param string $statement
      * @param string $value
+     * @param string|null $orderBy
+     * @param string|null $asc
      * @return array
      */
-    public function where(string $key, string $statement, string $value) {
+    public function where(string $key, string $statement, string $value, string $orderBy = null, string $asc = null) {
         $query = "select * from $this->table where $key $statement :$key";
+
+        if (!is_null($orderBy)) {
+            $query .= " ORDER BY $orderBy";
+
+            if (!is_null($asc)) {
+                $query .= " $asc";
+            }
+        }
 
         $pdoQuery = $this->database->prepare($query);
 

@@ -5,6 +5,7 @@ namespace Controllers;
 use Kernel\Auth;
 use Kernel\Controller;
 use Kernel\View;
+use Models\Article;
 use Models\Users;
 
 class AdminController extends Controller
@@ -40,6 +41,8 @@ class AdminController extends Controller
 
     public function dashboard(): View {
         if (Auth::user()) {
+            $article = new Article();
+            $this->view->countArticles = sizeof($article->getAll());
             $this->view->user = Auth::user();
             return $this->view->render('users/dashboard');
         }
