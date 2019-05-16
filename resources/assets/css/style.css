@@ -216,6 +216,7 @@ html, body {
 }
 
 .admin-content-caption {
+    color: #f2f2f2;
     position: absolute;
     bottom: 50px;
     left: 50px;
@@ -371,6 +372,8 @@ footer {
 }
 
 .admin-articles-list a {
+    margin-right: 5px;
+    margin-left: 5px;
     padding:5px 15px;
     background: #2098D1;
     color: whitesmoke;
@@ -569,3 +572,10 @@ input[type="checkbox"]:checked {
     border-color: #000;
 }
 
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}

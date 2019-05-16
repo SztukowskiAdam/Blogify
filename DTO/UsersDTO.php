@@ -8,4 +8,5 @@ class UsersDTO extends DTO
     public $email;
     public $password;
     public $repeatPassword;
+    public $isAdmin;
 }

@@ -18,7 +18,7 @@ class Auth
 
     private const MIN_NAME_SIZE = 3;
     private const MAX_NAME_SIZE = 16;
-    private const MIN_PASSWORD_SIZE = 7;
+    private const MIN_PASSWORD_SIZE = 2;
 
 
     public function __construct() {
@@ -35,7 +35,6 @@ class Auth
         self::$usersModel = new Users();
         if (filter_var(filter_var($email, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {
             if ( strlen($password) > self::MIN_PASSWORD_SIZE) {
-
                 $user = self::$usersModel->where('email', '=', $email);
                 if (!empty($user)) {
                     if (password_verify($password, $user[0]['password'])) {
@@ -66,8 +65,8 @@ class Auth
      * @return bool
      */
     public static function isAdmin(): bool {
-        if ($user = self::user()) {
-            return $user->isAdmin;
+        if ($user = self::user() && self::user()->isAdmin) {
+            return true;
         }
         return false;
     }

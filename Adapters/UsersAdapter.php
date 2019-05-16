@@ -26,6 +26,7 @@ class UsersAdapter
         self::$users->name = self::$usersDTO->name;
         self::$users->password = self::$usersDTO->password;
         self::$users->email = self::$usersDTO->email;
+        self::$users->isAdmin = self::$usersDTO->isAdmin;
 
         if (self::$users->timestamps) {
             self::$users->createdAt = self::$usersDTO->createdAt;
@@ -69,6 +70,7 @@ class UsersAdapter
         self::$usersDTO->name = self::$users->name;
         self::$usersDTO->password = self::$users->password;
         self::$usersDTO->email = self::$users->email;
+        self::$usersDTO->isAdmin = self::$users->isAdmin;
 
         if (self::$users->timestamps) {
             self::$usersDTO->createdAt = self::$users->createdAt;
@@ -89,6 +91,7 @@ class UsersAdapter
         property_exists($model, 'name') ? self::$users->name = $model->name : self::$users->name = null;
         property_exists($model, 'password') ? self::$users->password = $model->password : self::$users->password = null;
         property_exists($model, 'email') ? self::$users->email = $model->email : self::$users->email = null;
+        property_exists($model, 'isAdmin') ? self::$users->isAdmin = $model->isAdmin : self::$users->isAdmin = null;
 
         if (self::$users->timestamps) {
             property_exists($model, 'createdAt') ? self::$users->createdAt = $model->createdAt : self::$users->createdAt = null;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers;
+namespace Controllers\Admin;
 
 use Kernel\Auth;
 use Kernel\Controller;
@@ -17,26 +17,10 @@ class ArticlesController extends Controller
         $this->articles = new Article();
     }
 
-    public function index(): View {
-        $this->view->articles = $this->articles->getAll('createdAt', 'DESC');
-        return $this->view->render('articles/index');
-    }
-
-    public function show(): View {
-        $slug = func_get_args()[0];
-        $article = $this->articles->where('slug', '=', $slug);
-
-        if (!empty($article)) {
-            $this->view->article = (object) $article[0];
-            return $this->view->render('articles/show');
-        }
-        return $this->redirect('/');
-    }
-
     public function adminIndex(): View {
-        if (Auth::user()) {
+        if (Auth::isAdmin()) {
             $this->view->articles = $this->articles->getAll('createdAt', 'DESC');
-            return $this->view->render('articles/admin/index');
+            return $this->view->render('admin/articles/index', 'adminLayout');
         }
         return $this->redirect('/');
     }
@@ -50,7 +34,7 @@ class ArticlesController extends Controller
             } else {
                 $this->view->error = 'Pusty tytuł!';
                 $this->view->article = (object)$_POST;
-                return $this->view->render('articles/admin/form');
+                return $this->view->render('admin/articles/form', 'adminLayout');
             }
 
             if (!empty($_POST['slug']) && $_POST['slug'] === strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $_POST['slug'])))) {
@@ -58,7 +42,7 @@ class ArticlesController extends Controller
             } else {
                 $this->view->error = 'Przyjazny adres jest błędny!';
                 $this->view->article = (object)$_POST;
-                return $this->view->render('articles/admin/form');
+                return $this->view->render('admin/articles/form', 'adminLayout');
             }
 
             if (!empty($_POST['content'])) {
@@ -66,7 +50,7 @@ class ArticlesController extends Controller
             } else {
                 $this->view->error = 'Pusta treść';
                 $this->view->article = (object)$_POST;
-                return $this->view->render('articles/admin/form');
+                return $this->view->render('admin/articles/form', 'adminLayout');
             }
 
             if (!empty($_POST['homePage'])) {
@@ -90,7 +74,7 @@ class ArticlesController extends Controller
                 if (file_exists($destFile)) {
                     $this->view->error = 'Plik już istnieje!';
                     $this->view->article = (object)$_POST;
-                    return $this->view->render('articles/admin/form');
+                    return $this->view->render('admin/articles/form', 'adminLayout');
                 }else{
                     move_uploaded_file($filename,  $destFile);
                     $article['image'] = $uniquesavename.$ext;
@@ -98,7 +82,7 @@ class ArticlesController extends Controller
             } else if (empty($_POST['id'])){
                 $this->view->error = 'Nie załadowano pliku!';
                 $this->view->article = (object)$_POST;
-                return $this->view->render('articles/admin/form');
+                return $this->view->render('admin/articles/form', 'adminLayout');
             }
 
             if (!empty($_POST['id'])) {
@@ -107,7 +91,7 @@ class ArticlesController extends Controller
                 } else {
                     $this->view->error = 'Błąd w czasie aktualizacji artykułu!';
                     $this->view->article = (object)$_POST;
-                    return $this->view->render('articles/admin/form');
+                    return $this->view->render('admin/articles/form', 'adminLayout');
                 }
             } else {
                 if ($this->articles->save($article)) {
@@ -115,7 +99,7 @@ class ArticlesController extends Controller
                 } else {
                     $this->view->error = 'Błąd w czasie tworzenia artykułu!';
                     $this->view->article = (object)$_POST;
-                    return $this->view->render('articles/admin/form');
+                    return $this->view->render('admin/articles/form', 'adminLayout');
                 }
             }
         }
@@ -124,13 +108,21 @@ class ArticlesController extends Controller
 
     public function create(): View {
         $this->view->article = new Article();
-        return $this->view->render('articles/admin/form');
+        return $this->view->render('admin/articles/form', 'adminLayout');
     }
 
     public function edit(): View {
-        if (Auth::user()) {
+        if (Auth::isAdmin()) {
             $this->view->article = $this->articles->find((int)func_get_args()[0]);
-            return $this->view->render('articles/admin/form');
+            return $this->view->render('admin/articles/form', 'adminLayout');
+        }
+        return $this->redirect('/');
+    }
+
+    public function delete(): View {
+        if (Auth::isAdmin() && !empty(func_get_args()[0])) {
+            $this->articles->delete((int) func_get_args()[0]);
+            return $this->redirect('admin/articles');
         }
         return $this->redirect('/');
     }

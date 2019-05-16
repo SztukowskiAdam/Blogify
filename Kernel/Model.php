@@ -120,7 +120,27 @@ class Model
      * @return bool
      */
     public function delete(int $id): bool {
+        $query = "DELETE FROM $this->table WHERE $this->primaryKey = :id";
 
+        $pdoQuery = $this->database->prepare($query);
+        $pdoQuery->bindParam(":id", $id);
+
+        return $pdoQuery->execute();
+    }
+
+    /**
+     * @param string $key
+     * @param string $statement
+     * @param $value
+     * @return bool
+     */
+    public function deleteWhere(string $key, string $statement, $value): bool {
+        $query = "DELETE FROM $this->table WHERE $key $statement :$key";
+
+        $pdoQuery = $this->database->prepare($query);
+        $pdoQuery->bindParam(":$key", $value);
+
+        return $pdoQuery->execute();
     }
 
     /**
@@ -134,7 +154,7 @@ class Model
      * @param string|null $asc
      * @return array
      */
-    public function where(string $key, string $statement, string $value, string $orderBy = null, string $asc = null) {
+    public function where(string $key, string $statement, $value, string $orderBy = null, string $asc = null) {
         $query = "select * from $this->table where $key $statement :$key";
 
         if (!is_null($orderBy)) {

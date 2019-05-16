@@ -63,6 +63,7 @@ Slider.prototype = {
         this.links = this.el.querySelectorAll( "#slider-nav a" );
         this.wrapper = this.el.querySelector( "#slider-wrapper" );
         this.navigate();
+        $('.caption').first().addClass( "visible" );
     },
     navigate: function() {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers;
+namespace Controllers\Admin;
 
 use Kernel\Auth;
 use Kernel\Controller;
@@ -19,38 +19,42 @@ class AdminController extends Controller
     }
 
     public function login(): View {
-        if (Auth::user()) {
+        if (Auth::isAdmin()) {
             return $this->redirect('admin/dashboard');
-        }
-        return $this->view->render('users/login');
+        } /*else if (Auth::user()) {
+            return $this->redirect('/');
+        }*/
+        return $this->view->render('admin/login/login', 'adminLayout');
     }
 
     public function attempt(): View {
         if (!empty($_POST)) {
             $user = Auth::attempt($_POST['email'], $_POST['password']);
 
-            if ($user) {
+            if (Auth::isAdmin()) {
                 $this->view->user = $user;
                 return $this->redirect('admin/dashboard');
             } else {
                 $this->view->email = $_POST['email'];
             }
         }
-        return $this->view->render('users/login');
+        return $this->view->render('admin/login/login', 'adminLayout');
     }
 
     public function dashboard(): View {
-        if (Auth::user()) {
+        if (Auth::isAdmin()) {
             $article = new Article();
             $this->view->countArticles = sizeof($article->getAll());
             $this->view->user = Auth::user();
-            return $this->view->render('users/dashboard');
+            return $this->view->render('admin/dashboard/dashboard', 'adminLayout');
         }
         else return $this->redirect('/');
     }
 
     public function logout(): View {
-        session_destroy();
+        if (Auth::isAdmin()) {
+            session_destroy();
+        }
         return $this->redirect('/');
     }
 }
