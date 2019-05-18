@@ -9,11 +9,11 @@ class Auth
 {
     protected static $usersModel;
 
-    public const NAME_IN_USE = 470;
-    public const MAIL_IN_USE = 471;
-    public const INVALID_EMAIL = 473;
-    public const INVALID_NAME = 474;
-    public const INVALID_PASSWORDS = 475;
+    public const NAME_IN_USE = 'Taka nazwa już istnieje!!';
+    public const MAIL_IN_USE = 'Taki e-mail już istnieje!';
+    public const INVALID_EMAIL = 'Błędny adres e-mail!';
+    public const INVALID_NAME = 'Błędna nazwa';
+    public const INVALID_PASSWORDS = 'Błędne hasło!';
     public const USER_NOT_FOUND = 476;
 
     private const MIN_NAME_SIZE = 3;

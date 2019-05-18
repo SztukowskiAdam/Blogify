@@ -174,30 +174,43 @@ class Model
         return $pdoQuery->fetchAll();
     }
 
+
     /**
      * Multiple where statements
      * @param array $data
+     * @param null|string $order
      * @return array
      */
-    public function whereData(array $data): array {
+    public function whereData(array $data, ?string $order = 'DESC'): array {
 
         $query = '';
         $first = true;
         foreach ($data as $key => $value) {
             if ($first) {
-                $query .= "select * from $this->table where $key = :$key";
+                $query .= "select * from $this->table where $key = $value";
                 $first = false;
             } else {
-                $query .= " and $key = :$key";
+                $query .= " and $key = $value";
             }
         }
+        $query .= ' ORDER BY createdAt DESC';
         $pdoQuery = $this->database->prepare($query);
 
-        foreach ($data as $key => $value) {
-            $pdoQuery->bindParam(":$key", $value);
-        }
+        $pdoQuery->execute();
+        return $pdoQuery->fetchAll();
+    }
+
+
+    /**
+     * Allows to run raw select query
+     * @param string $query
+     * @return array
+     */
+    public function selectRaw(string $query) {
+        $pdoQuery = $this->database->prepare($query);
 
         $pdoQuery->execute();
+
         return $pdoQuery->fetchAll();
     }
 

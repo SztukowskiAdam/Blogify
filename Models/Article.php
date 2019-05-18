@@ -18,4 +18,6 @@ class Article extends Model
     public $updatedAt;
     public $homePage;
     public $inSlider;
+    public $authorId;
+    public $accepted;
 }

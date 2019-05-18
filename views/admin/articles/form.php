@@ -34,6 +34,14 @@
                 Pokazuj w sliderze
                 <input type="checkbox" name="inSlider" <?php if (!empty($this->article->inSlider)) echo 'checked'?>>
             </div>
+            <div class="article-form-status">
+                Status:
+                <select name="status">
+                    <option value="1" <?php if (!empty($this->article->status) && $this->article->status == 1) echo 'selected="selected"'?>>Oczekuje</option>
+                    <option value="2" <?php if (!empty($this->article->status) && $this->article->status == 2) echo 'selected="selected"'?>>Zaakceptowany</option>
+                    <option value="3" <?php if (!empty($this->article->status) && $this->article->status == 3) echo 'selected="selected"'?>>Odrzucony</option>
+                </select>
+            </div>
         </div>
         <div style="clear: both"></div>
 

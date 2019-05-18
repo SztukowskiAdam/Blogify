@@ -6,15 +6,19 @@ use Kernel\Auth;
 use Kernel\Controller;
 use Kernel\View;
 use Models\Article;
+use Models\ArticleComment;
+use Models\ArticleRating;
 
 class ArticlesController extends Controller
 {
-    private $articles;
+    private $articles, $articleComments, $articleRatings;
 
     public function __construct() {
         parent::__construct();
 
         $this->articles = new Article();
+        $this->articleComments = new ArticleComment();
+        $this->articleRatings = new ArticleRating();
     }
 
     public function adminIndex(): View {
@@ -26,7 +30,7 @@ class ArticlesController extends Controller
     }
 
     public function save(): View {
-        if (!empty($_POST)) {
+        if (!empty($_POST) && Auth::isAdmin()) {
             $article = [];
 
             if (!empty($_POST['title'])) {
@@ -65,6 +69,12 @@ class ArticlesController extends Controller
                 $article['inSlider'] = 0;
             }
 
+            if (!empty($_POST['status'])) {
+                $article['status'] = $_POST['status'];
+            } else {
+                $article['status'] = 1;
+            }
+
             if (!empty($_FILES['image']['name'])) {
                 $imagePath = "resources/images/articles/";
                 $uniquesavename=time().uniqid(rand());
@@ -85,7 +95,7 @@ class ArticlesController extends Controller
                 return $this->view->render('admin/articles/form', 'adminLayout');
             }
 
-            if (!empty($_POST['id'])) {
+            if (!empty($_POST['id'])) {;
                 if ($this->articles->update($article, $_POST['id'])) {
                     return $this->redirect('admin/articles');
                 } else {
@@ -94,6 +104,7 @@ class ArticlesController extends Controller
                     return $this->view->render('admin/articles/form', 'adminLayout');
                 }
             } else {
+                $article['authorId'] = Auth::user()->id;
                 if ($this->articles->save($article)) {
                     return $this->redirect('admin/articles');
                 } else {
@@ -120,8 +131,13 @@ class ArticlesController extends Controller
     }
 
     public function delete(): View {
+
         if (Auth::isAdmin() && !empty(func_get_args()[0])) {
-            $this->articles->delete((int) func_get_args()[0]);
+            $articleId = (int) func_get_args()[0];
+            $this->articleRatings->deleteWhere('articleId', '=', $articleId);
+            $this->articleComments->deleteWhere('articleId', '=', $articleId);
+            $this->articles->delete($articleId);
+
             return $this->redirect('admin/articles');
         }
         return $this->redirect('/');

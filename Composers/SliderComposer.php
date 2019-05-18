@@ -9,8 +9,12 @@ class SliderComposer extends AbstractComposer
 {
     public function compose(): object {
         $article = new Article();
+        $params = [
+            'inSlider' => 1,
+            'status' => 2,
+        ];
         return (object) [
-            'slider' => $article->where('inSlider', '=', 1, 'createdAt', 'DESC'),
+            'slider' => $article->whereData($params),
         ];
     }
 }

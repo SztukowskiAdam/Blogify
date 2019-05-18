@@ -21,9 +21,7 @@ class AdminController extends Controller
     public function login(): View {
         if (Auth::isAdmin()) {
             return $this->redirect('admin/dashboard');
-        } /*else if (Auth::user()) {
-            return $this->redirect('/');
-        }*/
+        }
         return $this->view->render('admin/login/login', 'adminLayout');
     }
 

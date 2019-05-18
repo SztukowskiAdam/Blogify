@@ -325,6 +325,13 @@ footer {
     color: #2098D1;
     margin-left: 15%;
     margin-top: 20px;
+    float: left;
+}
+.article-rate {
+    color: #2098D1;
+    float: right;
+    margin-top: 20px;
+    margin-right: 15%;
 }
 
 .article-content {
@@ -342,8 +349,38 @@ footer {
     color: #1088C1;
 }
 
+.article-add-comment {
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    color: #2098D1;
+}
+
+.article-comments {
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    color: #2098D1;
+}
+
+.article-single-comment {
+    background-color: #f2f2f2;
+    color: #141414;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 10%;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+}
+.article-single-comment h4 {
+    font-weight: normal;
+    color: darkgray;
+    margin-bottom: 0;
+}
+
 /* admin articles table */
-.admin-articles-list {
+.articles-list {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -351,19 +388,19 @@ footer {
     color: #f2f2f2;
 }
 
-.admin-articles-list td, .admin-articles-list th {
+.articles-list td, .rticles-list th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-.admin-articles-list tr:nth-child(even){
+.articles-list tr:nth-child(even){
     background-color: #f2f2f2;
     color: #140000;
 }
 
-.admin-articles-list tr:hover {background-color: #ddd;}
+.articles-list tr:hover {background-color: #ddd;}
 
-.admin-articles-list th {
+.articles-list th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -371,7 +408,7 @@ footer {
     color: white;
 }
 
-.admin-articles-list a {
+.articles-list a {
     margin-right: 5px;
     margin-left: 5px;
     padding:5px 15px;
@@ -383,7 +420,7 @@ footer {
     text-decoration: none;
 }
 
-.admin-articles-list a:hover {
+. articles-list a:hover {
     text-decoration: underline;
 }
 
@@ -578,4 +615,51 @@ input[type="checkbox"]:checked {
 
 .red {
     color: red;
+}
+
+.yellow {
+    color: goldenrod;
+}
+
+
+.user-login {
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    box-sizing: border-box;
+    width: 70%;
+}
+
+.user-login input[type="email"], input[type=password], input[type=submit] {
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    color: #141414;
+    border: solid .5px #141414;
+    height: 30px;
+    width: 250px;
+    padding: 5px;
+}
+
+.user-login input[type=submit] {
+    background-color: #4CAF50;
+    border: solid 2px #2a3f54;
+    color: #f2f2f2;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.user-login input[type=submit]:hover {
+    cursor: pointer;
+}
+
+.user-content {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.add-article-btn {
+    margin-bottom: 30px;
 }

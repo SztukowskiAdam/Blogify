@@ -4,8 +4,18 @@ namespace Routes;
 use Kernel\Router;
 
 Router::get('/', 'HomeController@index');
-Router::get('articles', 'HomeController@index');
+Router::get('articles', 'HomeController@articles');
 Router::get('articles/:slug', 'HomeController@show');
+
+/* USER */
+Router::get('login', 'UsersController@login');
+Router::get('register', 'UsersController@register');
+Router::post('register', 'UsersController@storeUser');
+Router::post('login', 'UsersController@attempt');
+Router::get('logout', 'UsersController@logout');
+Router::get('users/articles', 'UsersController@index');
+Router::get('users/articles/create', 'ArticlesController@create');
+Router::post('users/articles/create', 'ArticlesController@store');
 
 /* ADMIN */
 Router::get('admin/login', 'Admin\AdminController@login');
