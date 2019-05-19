@@ -119,3 +119,81 @@ document.addEventListener( "DOMContentLoaded", function() {
     var aSlider = new Slider( "#slider" );
 
 });
+
+
+
+// ratio stars
+
+$(document).ready(function() {
+    $(".ratio-1").mouseover(function () {
+        $(".ratio-1").css("color", "goldenrod");
+    });
+    $(".ratio-1").mouseout(function () {
+        $(".ratio-1").css("color", "");
+    });
+
+    $(".ratio-2").mouseover(function () {
+        $(".ratio-1").css("color", "goldenrod");
+        $(".ratio-2").css("color", "goldenrod");
+    });
+    $(".ratio-2").mouseout(function () {
+        $(".ratio-1").css("color", "");
+        $(".ratio-2").css("color", "");
+    });
+
+    $(".ratio-3").mouseover(function () {
+        $(".ratio-1").css("color", "goldenrod");
+        $(".ratio-2").css("color", "goldenrod");
+        $(".ratio-3").css("color", "goldenrod");
+    });
+    $(".ratio-3").mouseout(function () {
+        $(".ratio-1").css("color", "");
+        $(".ratio-2").css("color", "");
+        $(".ratio-3").css("color", "");
+    });
+
+    $(".ratio-4").mouseover(function () {
+        $(".ratio-1").css("color", "goldenrod");
+        $(".ratio-2").css("color", "goldenrod");
+        $(".ratio-3").css("color", "goldenrod");
+        $(".ratio-4").css("color", "goldenrod");
+    });
+    $(".ratio-4").mouseout(function () {
+        $(".ratio-1").css("color", "");
+        $(".ratio-2").css("color", "");
+        $(".ratio-3").css("color", "");
+        $(".ratio-4").css("color", "");
+    });
+
+    $(".ratio-5").mouseover(function () {
+        $(".ratio-1").css("color", "goldenrod");
+        $(".ratio-2").css("color", "goldenrod");
+        $(".ratio-3").css("color", "goldenrod");
+        $(".ratio-4").css("color", "goldenrod");
+        $(".ratio-5").css("color", "goldenrod");
+    });
+    $(".ratio-5").mouseout(function () {
+        $(".ratio-1").css("color", "");
+        $(".ratio-2").css("color", "");
+        $(".ratio-3").css("color", "");
+        $(".ratio-4").css("color", "");
+        $(".ratio-5").css("color", "");
+    });
+});
+
+$(document).ready(function(){
+
+    $('.ratio').on('click', function() {
+        const host = 'http://localhost/paiw/articles/rate';
+        const ratio = this.getAttribute('data-ratio');
+        const articleId = this.getAttribute('data-article');
+
+
+        $.post(host, {
+            'ratio': ratio,
+            'articleId': articleId
+        }).done(function(data) {
+            location.reload();
+        });
+    });
+});

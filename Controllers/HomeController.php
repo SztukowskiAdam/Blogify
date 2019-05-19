@@ -51,6 +51,11 @@ class HomeController extends Controller
                 return $this->redirect('/');
             }
             $ratio = $this->articlesRating->selectRaw('SELECT AVG(ratio) as average FROM  article_rating WHERE articleId = '.$article[0]['id'].' GROUP BY articleId');
+            $userRatio = $this->articlesRating->whereData(['userId' => Auth::user()->id, 'articleId' => $article[0]['id']]);
+
+            if (!empty($userRatio)) {
+                $this->view->userRatio = $userRatio[0]['ratio'];
+            }
             if (empty($ratio)) {
                 $average = 'Brak ocen';
             } else {

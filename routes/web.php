@@ -5,7 +5,9 @@ use Kernel\Router;
 
 Router::get('/', 'HomeController@index');
 Router::get('articles', 'HomeController@articles');
+Router::get('articles/rate', 'ArticlesController@rateArticle');
 Router::get('articles/:slug', 'HomeController@show');
+Router::post('articles/:slug', 'ArticlesController@addComment');
 
 /* USER */
 Router::get('login', 'UsersController@login');

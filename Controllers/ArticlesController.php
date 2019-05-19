@@ -92,4 +92,51 @@ class ArticlesController extends Controller
         return $this->redirect('users/articles');
     }
 
+
+    public function addComment() {
+        if (!empty($_POST) && $user = Auth::user()) {
+            if (!empty($_POST['articleId']) && !empty($_POST['comment'])) {
+                $comment = [];
+                $comment['articleId'] = $_POST['articleId'];
+                $comment['content'] = $_POST['comment'];
+                $comment['userId'] = $user->id;
+
+                $this->articleComment->save($comment);
+
+            }
+        }
+
+        return $this->refresh();
+    }
+
+    public function rateArticle(): ?string {
+        if (!empty($_POST) && $user = Auth::user()) {
+            if (!empty($_POST['ratio']) && !empty($_POST['articleId'])) {
+                $currentRate = $this->articlesRating->whereData(['articleId' => $_POST['articleId'], 'userId' => $user->id]);
+
+                if (!empty($currentRate)) {
+                    $this->articlesRating->update(['ratio' => $_POST['ratio']], (int) $currentRate[0]['id']);
+
+                } else {
+                    $ratio = [];
+
+                    $ratio['ratio'] = $_POST['ratio'];
+                    $ratio['articleId'] = $_POST['articleId'];
+                    $ratio['userId'] = $user->id;
+
+                    $this->articlesRating->save($ratio);
+                }
+
+                $ratio = $this->articlesRating->selectRaw('SELECT AVG(ratio) as average FROM  article_rating WHERE articleId = '.$_POST['articleId'].' GROUP BY articleId');
+                if (empty($ratio)) {
+                    $average = 'Brak ocen';
+                } else {
+                    $average = round($ratio[0]['average'],2);
+                }
+                return $average;
+            }
+        }
+        return 'error';
+    }
+
 }

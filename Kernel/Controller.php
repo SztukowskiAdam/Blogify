@@ -19,4 +19,8 @@ class Controller
         $to = Router::path($to);
         return header("Location: $to");
     }
+
+    public function refresh() {
+        return header("Refresh:0");
+    }
 }

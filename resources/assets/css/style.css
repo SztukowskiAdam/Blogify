@@ -663,3 +663,11 @@ input[type="checkbox"]:checked {
 .add-article-btn {
     margin-bottom: 30px;
 }
+
+.ratio:hover {
+    cursor: pointer;
+}
+
+.ratio-selected {
+    color: goldenrod;
+}
