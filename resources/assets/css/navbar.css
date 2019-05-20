@@ -1,0 +1,56 @@
+.navbar {
+    width: 100%;
+    max-width: 100%;
+    background-image: url('../../images/background/nav2.jpg');
+    background-size: cover;
+    background-position: center center;
+    height: 56px;
+    min-height: 100px;
+}
+
+.nav {
+    z-index: 999;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100px;
+    padding-left: 10%;
+    background-color: rgba(0, 0, 50, 0.7);
+    list-style-type: none;
+    margin: 0;
+    position: fixed;
+    line-height: 100px;
+}
+
+.nav li {
+    float: left;
+    list-style: none;
+}
+
+.nav li a {
+    font-size: 1.3em;
+    display: block;
+    color: white;
+    text-align: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-decoration: none;
+    min-height: 100px;
+}
+
+.nav li a:hover {
+    background-color: rgba(0, 0, 60, 0.7);
+}
+
+.nav .active a {
+    text-decoration: underline;
+}
+
+.teaser {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: steelblue;
+    font-family: 'Kaushan Script', cursive;
+}

@@ -71,9 +71,9 @@
 
         <?php if (\Kernel\Auth::user() && $this->article->status == 2) {
             echo '<form method="POST">';
-            echo '<textarea name="comment"></textarea>';
+            echo '<textarea name="comment" class="comment-content" placeholder="Twój komentarz..."></textarea>';
             echo '<input type="hidden" name="articleId" value="'.$this->article->id.'">';
-            echo '<input type="submit" value="Dodaj komentarz">';
+            echo '<input class="btn" type="submit" value="Dodaj komentarz">';
         } else if ($this->article->status != 2) {
             echo 'Dodawanie komentarzy jest tymczasowo wyłączone ze względu na nieaktywny artykuł';
         } else {

@@ -29,3 +29,5 @@ Router::get('admin/articles/create', 'Admin\ArticlesController@create');
 Router::post('admin/articles/save', 'Admin\ArticlesController@save');
 Router::get('admin/articles/edit/:id', 'Admin\ArticlesController@edit');
 Router::get('admin/articles/delete/:id', 'Admin\ArticlesController@delete');
+Router::get('admin/settings', 'Admin\SettingsController@edit');
+Router::post('admin/settings', 'Admin\SettingsController@save');

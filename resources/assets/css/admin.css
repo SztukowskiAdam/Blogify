@@ -1,0 +1,217 @@
+.vertical-menu {
+    width: 15%;
+    height: 100%;
+    float: left;
+}
+
+.vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc;
+}
+
+.vertical-menu a.active {
+    background-color: #ddd;
+    color: white;
+}
+
+.admin-content {
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 85%;
+    float: left;
+    min-height: 100%;
+    background-color: #f2f2f2;
+}
+
+.admin-content .dashboard {
+    margin-top: 100px;
+    font-size: 2em;
+    line-height: 60px;
+    color: #2098D1;
+}
+
+/* admin login page */
+.admin-login {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    width: 30%;
+    background-color: whitesmoke;
+    text-align: center;
+    color: #140000;
+}
+
+.admin-login-content {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    width: 70%;
+    background-image: url('../../images/background/new_york.jpg');
+    background-size: cover;
+}
+
+.admin-content-caption {
+    color: #f2f2f2;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+}
+
+.admin-content-caption h1 {
+    font-size: 4em;
+}
+
+.admin-login-container {
+    height: 99.5%;
+    border-top: solid 4px black;
+}
+
+.admin-login input[type=email], input[type=password], input[type=text] {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    margin-top: 40px;
+}
+.admin-login input[type=email] {
+    margin-top: 80px;
+}
+
+.admin-login input[type=submit] {
+    margin-top: 50px;
+    padding:5px 15px;
+    background: #2098D1;
+    color: whitesmoke;
+    border: 0 none;
+    cursor:pointer;
+    border-radius: 8px;
+    font-size: 1.5em;
+}
+
+.admin-login-credentials {
+    margin-top: 150px;
+}
+
+
+.articles-form-title {
+    margin-left: 10%;
+    width: 40%;
+    float: left;
+
+}
+
+.articles-form-slug {
+    margin-left: 10%;
+    width: 40%;
+    float: left;
+}
+
+.articles-form {
+    margin-top: 50px;
+    color: #141414;
+    font-size: 1.2em;
+}
+
+.articles-form input[type=text] {
+    margin-top: 0;
+    margin-left: 20px;
+    width: 400px;
+    border-radius: 2px;
+    float: left;
+}
+
+label {
+    display: block;
+    float: left;
+}
+
+input[type="checkbox"] {
+    font: 14px/20px 'Open Sans', Arial, sans-serif;
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 1px solid #2a3f54;
+    opacity: .6;
+    -webkit-transition: all .12s, border-color .08s;
+    transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked {
+    top: -5px;
+    left: 5px;
+    border-radius: 0;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.articles-form-image {
+    overflow: hidden;
+    position: relative;
+    margin: 5%;
+    width: 40%;
+    max-height: 300px;
+    float: left;
+}
+
+.articles-form-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.article-form-checkboxes {
+    margin: 5%;
+    width: 40%;
+    max-height: 300px;
+    float: left;
+}
+
+.article-form-textarea {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.article-form-error {
+    margin-top: 20px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    color: #F0AD4E;
+}
+
+.btn-article-submit {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.display-none {
+    display: none;
+}
+
+#article-image {
+    margin-top: 20px;
+    border-radius: 10px;
+}
