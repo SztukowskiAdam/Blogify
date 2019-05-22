@@ -80,7 +80,7 @@
     border-top: solid 4px black;
 }
 
-.admin-login input[type=email], input[type=password], input[type=text] {
+.admin-login input[type=email], .admin-login input[type=password], .admin-login input[type=text] {
     border: 0;
     outline: 0;
     background: transparent;
